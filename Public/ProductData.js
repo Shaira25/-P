@@ -1,3 +1,9 @@
+//codes are from lab 13 exercise 3//
+// Also had help from Classmate Kiara Furutani//
+//Images are own by me (Shane Gimenez)//
+
+
+
 products =
 [
     {
