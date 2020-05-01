@@ -1,0 +1,34 @@
+
+
+
+body {
+    background-image: url(./images/backdrop3.JPG);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: 100pc;
+   }
+
+   a {
+    text-align: center;
+    color: whitesmoke;
+}
+table {
+
+    background-color: blanchedalmond;
+    
+   
+}
+
+footer {
+    text-align: center;
+    color: whitesmoke;
+}
+
+p {
+    text-align: center;
+    color: black;
+    font-size: xx-large;
+    font-family: cursive;
+}
+
+
