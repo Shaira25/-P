@@ -53,6 +53,12 @@ function ValidateEmail(str)
     return /\S+@\S+\.\S+/.test(str);
 }
 
+function addUser(Username, Email, Password) {
+
+    var jsonStr = JSON.stringify({ Username : Username, Email : Email, Password : Password});
+
+}
+
 // Taken from Lab 14
 // Checks if JSON string already exists
 if (fs.existsSync(filename)) {
@@ -153,9 +159,10 @@ app.post("/register_user", function (request, response) {
     }
 
     //email
-    if (request.body.email == '') { //must have an email
+    var emailAddr = request.body.email;
+    if (emailAddr == '') { //must have an email
         errs.email = '<font color="red">Please Enter An Email Address</font>';
-    } else if (ValidateEmail(request.body.email) == false) { //if does not follow proper email format, give error
+    } else if (ValidateEmail(emailAddr) == false) { //if does not follow proper email format, give error
         errs.email = '<font color="red">Please Enter A Valid Email Address</font>';
     } else {
         errs.email = null;
@@ -179,7 +186,8 @@ app.post("/register_user", function (request, response) {
 
     if (errs.username == null && errs.email == null &&
     errs.password == null && errs.repeat_password == null) {
-        response.redirect("./cart.html"); // Send back to login page with qString    
+        addUser(registered_username, emailAddr, pwd, pwdRep);
+        response.redirect("./ProductsDisplay1.html"); // Send back to login page with qString    
     } else {
         response.redirect("./registration_display.html"); // Send back to login page with qString    
     }
