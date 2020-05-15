@@ -79,9 +79,28 @@
     <div class="card">
       <img src="/images/3.jpeg" alt="Classic" style="width:100%">
       <h1>Shy Gray</h1>
-      <p class="price">$15.00</p>
-      <p>Your discreet yet elegant design!</p>
-      <p><button>Add to Cart</button></p>
+      <script>
+        // Generating variables for items --> Taken from Assignment 1 example
+        for (i = 0; i < products.length; i++) {
+            document.write(` 
+      <section class="Facemask Design">
+      <h2>${shy_products[i]["Facemask"]}</h2>
+      <p>\$${shy_products[i]["price"]}</p>
+<img class="img" src="${shy_products[i]["image"]}">
+<br>
+     
+     
+      <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
+      
+      
+      </section>
+    `);
+        }
+       
+    </script>
+     <p>No need to be shy anymore!</p>
+     <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
+     <p><button>Add to Cart</button></p>
     </div>
 <center>
     

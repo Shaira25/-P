@@ -1,4 +1,4 @@
-/* Assignment 2 by Shane Gimenez
+/* Assignment 3 by Shane Gimenez and Marc Masaoay
 Codes are from Professor Dan's Lab 13 exercises. And with guidance of Kiara Furutani */
 
 
@@ -93,7 +93,6 @@ app.post("/process_form", function (request, response) {
 });
 
 // Taken from Lab 14
-// Post sourced from Shane Shimizu
 // Processes login page
 app.post("/login_form", function (request, response) {
     console.log(request.body); // Checks in console
@@ -180,7 +179,7 @@ app.post("/register_user", function (request, response) {
 
     if (errs.username == null && errs.email == null &&
     errs.password == null && errs.repeat_password == null) {
-        response.redirect("./cart.html"); // Send back to login page with qString    
+        response.redirect("./ProductsDisplay1.html"); // Send back to login page with qString    
     } else {
         response.redirect("./registration_display.html"); // Send back to login page with qString    
     }

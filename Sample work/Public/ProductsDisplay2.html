@@ -78,11 +78,29 @@
     <h2 style="text-align:center"><i>Sha'zey's Design</i></h2>
 
     <div class="card">
-      <img src="/images/1.jpeg" alt="Aloha" style="width:100%">
+      <img src="/images/2.jpeg" alt="Aloha" style="width:100%">
       <h1>Aloha</h1>
-      <p class="price">$10.00</p>
-      <p>Your classic facemask design!</p>
-      <p><button>Add to Cart</button></p>
+      <script>
+        // Generating variables for items --> Taken from Assignment 1 example
+        for (i = 0; i < products.length; i++) {
+            document.write(` 
+      <section class="Facemask Design">
+      <h2>${aloha_products[i]["Facemask"]}</h2>
+      <p>\$${aloha_products[i]["price"]}</p>
+<img class="img" src="${aloha_products[i]["image"]}">
+<br>
+     
+     
+      <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
+      
+      
+      </section>
+    `);
+        }
+    </script>
+    <p>Mahaloha!</p>
+    <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
+    <p><button>Add to Cart</button></p>
     </div>
 <center>
     
