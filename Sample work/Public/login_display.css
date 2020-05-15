@@ -1,0 +1,125 @@
+/* // Assignment 2 by Shane Gimenez//
+// Codes are from https://www.template.net/web-templates/htmlcss-templates/html-login-form-templates/ //
+// deleted and added some codes w3schools.com // */
+
+
+body{
+	margin: 0;
+	padding: 0;
+	background: #fff;
+
+	color: #fff;
+	font-family: Arial;
+	font-size: 12px;
+}
+
+
+
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(./images/_MG_2059.JPG);
+	background-size: cover;
+	z-index: 0;
+}
+
+
+.header{
+	color: green;
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 255px);
+	z-index: 2;
+}
+
+.header div{
+	float: center;
+	color: blanchedalmond;
+	font-style: italic;
+	font-family: cursive;
+	font-size: 55px;
+	font-weight: 200;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+
+.login{
+	position: absolute;
+	top: calc(45% - 100px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid teal;
+	border-radius: 2px;
+	color: whitesmoke;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid teal;
+	border-radius: 2px;
+	color: teal;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=button]{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid teal;
+	cursor: pointer;
+	border-radius: 2px;
+	color:teal;
+	font-family: 'Exo', sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.login input[type=button]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=button]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid whitesmoke;
+}
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid whitesmoke;
+}
+
+.login input[type=button]:focus{
+	outline: none;
+}
+

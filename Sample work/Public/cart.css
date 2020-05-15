@@ -1,0 +1,28 @@
+
+body {
+    background-image: url(./images/waterfallbackdrop.JPG);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+   }
+
+   a {
+    text-align: center;
+    color: whitesmoke;
+}
+table {
+
+    background-color: blanchedalmond;
+    
+   
+}
+
+
+p {
+    text-align: center;
+    color: black;
+    font-size: xx-large;
+    font-family: cursive;
+}
+
+

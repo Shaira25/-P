@@ -1,0 +1,55 @@
+
+/* Codes are from w3schools.com 
+Assignment 2 by Shane Gimenez*/
+
+
+
+body {
+    text-align: left;
+    margin: 100px;
+    font-size: xx-large;
+    text-indent: 7pt;
+    color:teal;
+    font-family: cursive;
+
+
+    background-image:url('./images/bee.jpeg');
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+    
+  
+}
+
+h6 {
+
+    color: ghostwhite;
+    margin-top: 0pt;
+    font-size: small;
+    
+}
+
+img {
+    image-rendering: 10pt;
+    border: 1px solid #008080;
+    border-radius: 4px; 
+    padding: 5px;
+    width: 300px;
+    height: 200px;
+}
+
+p {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+img:hover {
+    box-shadow: 0 0 5px 1px ghostwhite;
+  
+}
+
+footer {
+    text-align: center;
+    color: whitesmoke;
+}
+
