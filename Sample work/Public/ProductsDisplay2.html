@@ -1,124 +1,160 @@
+<!-- /* codes are from w3schools.com and edited to the website 
+Assignment 3 by Shane Gimenez and Marc Masaoy */ -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <style>
-        header {
-            color: black
+  <style>
+    /* css */
 
+    body {
+      background-image: url(./images/9.JPG);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: fixed;
 
-        }
-        body {
-            background-image: url(./images/yellow.JPG);
-            background-size: cover;
-            background-repeat: no-repeat;
-             background-position: fixed;
+    }
 
-        }
-        h2 {
-            color: whitesmoke;
-        }
+    .header {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 10px 10px;
+    }
 
-        .card {
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-          max-width: 500px;
-          max-height: 600px;
-          margin: auto;
-          text-align: center;
-          font-family: arial;
-          background-color: aliceblue;
-        }
-        
-        .price {
-          color: grey;
-          font-size: 22px;
-        }
-        
-        .card button {
-          border: none;
-          outline: 0;
-          padding: 12px;
-          color: white;
-          background-color: #000;
-          text-align: center;
-          cursor: pointer;
-          width: 100%;
-          font-size: 18px;
-        }
-        
-        .card button:hover {
-          opacity: 0.7;
-        }
+    .header a {
+      float: left;
+      color: teal;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 4px;
+    }
 
-        a {
+    .header a.logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
 
-            color: black;
-        }
+    .header a:hover {
+      background-color: #ddd;
+      color: teal;
+    }
 
-        footer {
-            
-    text-align: center;
-    color: whitesmoke;
-}
-        </style>
+    .header a.active {
+
+      color: teal;
+    }
+
+    .header-right {
+      float: right;
+    }
+
+    .header-right {
+      float: none;
+    }
+
+    h2 {
+      color: whitesmoke;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      max-height: 700px;
+      margin: auto;
+      text-align: center;
+      font-family: cursive;
+      background-color: aliceblue;
+    }
+
+    .price {
+      color: grey;
+      font-size: 22px;
+    }
+
+    .card button {
+      border: none;
+      outline: 0;
+      padding: 12px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    .card button:hover {
+      opacity: 0.7;
+    }
+
+    a {
+
+      color: whitesmoke;
+    }
+
+    footer {
+
+      text-align: center;
+      color: whitesmoke;
+    }
+  </style>
 
 
 </head>
 <header>
-    <div>
-    <a href="ProductsDisplay1.html">Previous</a> 
-</div>
+  <div class="header">
+    <a  class="logo">Sha'zey's design!</a>
+    <div class="header-right">
+      <a class="active" href="./index.html">Home</a>
+      <a href="./cart.html">View Cart</a>
+      <a href="./logindisplay.html">Login/Register</a>
+    </div>
 </header>
 
 <body>
-    
-    <h2 style="text-align:center"><i>Sha'zey's Design</i></h2>
 
-    <div class="card">
-      <img src="/images/2.jpeg" alt="Aloha" style="width:100%">
-      <h1>Aloha</h1>
-      <script>
-        // Generating variables for items --> Taken from Assignment 1 example
-        for (i = 0; i < products.length; i++) {
-            document.write(` 
+  <h2 style="text-align:center">Facemask Design</h2>
+
+  <div class="card">
+    <img src="/images/2.jpeg" alt="Aloha" style="width:100%">
+    <h1>Aloha</h1>
+    <script>
+      // Generating variables for items --> Taken from Assignment 1 example
+      for (i = 0; i < aloha_products.length; i++) {
+        document.write(` 
       <section class="Facemask Design">
       <h2>${aloha_products[i]["Facemask"]}</h2>
       <p>\$${aloha_products[i]["price"]}</p>
 <img class="img" src="${aloha_products[i]["image"]}">
-<br>
-     
-     
-      <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
-      
-      
+<br>   
       </section>
     `);
-        }
+      }
     </script>
-    <p>Mahaloha!</p>
-    <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"> 
+    <p>Aloha is the way!</p>
+    <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}"
+      onkeyup="checkQuantityTextbox(this);">
     <p><button>Add to Cart</button></p>
-    </div>
-<center>
-    
-    <br>
-    <br>
-    <a href="ProductsDisplay3.html">Next</a>
-</center>
+  </div>
+
 </body>
+<center>
+  <p><a href="ProductsDisplay1.html">Previous </a> </p><p><a href="ProductsDisplay3.html">Next </a></p>
+</center>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-<footer>
-    © 2020 Shane Gimenez 
-</footer>
 </html>
+<br>
+<br>
+<footer>
+  © 2020 Shane Gimenez & Marc Masaoy
+</footer>
