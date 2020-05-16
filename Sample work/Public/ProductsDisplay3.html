@@ -142,9 +142,13 @@ Assignment 3 by Shane Gimenez and Marc Masaoy */ -->
       }
     </script>
     <p>Simple but pretty!</p>
-    <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity${i}"
+    <form name="addToCart" action="/add_to_cart" method="POST">
+      <input type="hidden" name="productName" value="shy_products">
+      <input type="hidden" name="redirectTo" value="ProductsDisplay3.html">
+      <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity"
       onkeyup="checkQuantityTextbox(this);">
-    <p><button>Add to Cart</button></p>
+      <p><button>Add to Cart</button></p>
+    </form>
   </div>
 
 </body>

@@ -2,11 +2,11 @@
 //codes are from lab 13 exercise 3//
 //Images are own by me (Shane Gimenez)//
 
+var productNames = ["classic_products", "aloha_products", "shy_products", "travel_products"];
 
+var products = {
 
-
-var classic_products =
-[
+"classic_products" :
     {
         // Product 1
         "Facemask": "Classic",
@@ -14,34 +14,28 @@ var classic_products =
         "price": 7,
         "image": "./images/1.jpg"
     },
-];
-var aloha_products =
-[
+"aloha_products" :
     {
         // Product 2
         "Facemask": "Aloha",
         "price": 15,
         "image": "./images/2.jpg"
     },
-];
-var shy_products =
-[
+"shy_products" :
     {
         // Product 3
         "Facemask": "Shy Gray",
         "price": 15,
         "image": "./images/3.jpg"
     },
-]
-var travel_products =
-[
+"travel_products" :
     {
         // Product 4
         "Facemask": "Travel Blue",
         "price": 15,
         "image": "./images/4.jpg"
     },
-]
+};
 
 
 

@@ -51,15 +51,46 @@ if (quantity[i] == null || quantity [i].length == 0 ) {
          </tr>
          <!-- Prints out the items on the invoice and calculates the totals -->
          <script>
-           for (var i = 0; i < products.length; i++) {
-             var extended_prices = products[i]["price"] * quantity[i];
-             var subtotal = extended_prices + subtotal;
-             // Template taken from Invoice1_1 on Assignment 1 page on class website
+          var rawCookies = document.cookie;
+          var rawCookieItems = rawCookies.split(";");
+          var cookieData = {};
+
+          for (var i = 0; i < rawCookieItems.length; i++) {
+            var tokens = rawCookieItems[i].split("=");
+            if (tokens == null || tokens.length != 2) {
+              continue;
+            }
+
+            for (var j = 0; j < tokens.length; j++) {
+              tokens[j] = tokens[j].trim();
+            }
+
+            if (tokens[0] == null || tokens[0].length == 0) {
+              continue;
+            }
+
+            cookieData[tokens[0]] = tokens[1];
+          }
+
+          for (var i = 0; i < productNames.length; i++) {
+            var quantity = cookieData["num_" + productNames[i]];
+            if (quantity == null || quantity == "") {
+              quantity = 0;
+            }
+
+            if (quantity == 0) {
+              continue;
+            }
+
+            var productInfo = products[productNames[i]];
+            var extended_prices = productInfo["price"] * quantity;
+            var subtotal = extended_prices + subtotal;
+            // Template taken from Invoice1_1 on Assignment 1 page on class website
              document.write(`
                  <tr>
-                     <td width="43%">${products[i]["Facemask"]}</td>
-                     <td align="center" width="11%">${quantity[i]}</td>
-                     <td align="right" width="13%">\$${products[i]["price"]}</td>
+                  <td width="43%">${productInfo["Facemask"]}</td>
+                     <td align="center" width="11%">${quantity}</td>
+                     <td align="right" width="13%">\$${productInfo["price"]}</td>
                      <td align="right" width="54%">\$${extended_prices.toFixed(2)}</td>
                      <td align="right" width="43%"><input type="button" value="Modify Amount" onclick="Modify Item()">
                        <input type="button" value="Remove" onclick="Remove Item()"></td>
