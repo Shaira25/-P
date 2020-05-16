@@ -1,4 +1,4 @@
-/* Assignment 3 by Shane Gimenez and Marc Masaoay
+/* Assignment 2 by Shane Gimenez
 Codes are from Professor Dan's Lab 13 exercises. And with guidance of Kiara Furutani */
 
 
@@ -9,14 +9,18 @@ var data = require('./public/product_data.js');
 var products = data.products;
 const queryString = require("querystring");
 var filename = 'UserData.json';
+var cookieParser = require('cookie-parser');
 
 var app = express();
+app.use(myParser.urlencoded({ extended: true })); // Server-side processing
+app.use(cookieParser());
+
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
 });
 
-app.use(myParser.urlencoded({ extended: true })); // Server-side processing
+
 
 // Taken from Lab 14
 // Function used to check for valid quantities
@@ -53,6 +57,12 @@ function ValidateEmail(str)
     return /\S+@\S+\.\S+/.test(str);
 }
 
+// Function used to add new user account
+function addUser(Username, Email, Password) {
+    users_reg_data[Username] = {Email : Email, Password : Password};
+    fs.writeFileSync(filename, JSON.stringify(users_reg_data));
+}
+
 // Taken from Lab 14
 // Checks if JSON string already exists
 if (fs.existsSync(filename)) {
@@ -64,6 +74,14 @@ if (fs.existsSync(filename)) {
 } else {
     console.log(filename + ' does not exist!');
 }
+
+app.get("/", function (request, response) {
+    response.cookie("num_" + "classic_products", 0);
+    response.cookie("num_" + "aloha_products", 0);
+    response.cookie("num_" + "shy_products", 0);
+    response.cookie("num_" + "travel_products", 0);
+    response.redirect("./index.html");
+});
 
 // Taken from Lab 14
 // Processes products page
@@ -131,6 +149,16 @@ app.post("/login_form", function (request, response) {
     response.redirect("./logindisplay.html?" + qString); // Send back to login page with qString
 });
 
+app.post("/add_to_cart", function (request, response) {
+    var hoge = response.cookie["num_" + "classic_products"];
+
+    var productName = request.body.productName;
+    var curQuantity = parseInt(request.cookies["num_" + productName]);
+    var newQuantity = curQuantity + parseInt(request.body.quantity);
+    response.cookie("num_" + productName, newQuantity);
+    response.redirect("./" + request.body.redirectTo);
+});
+
 
 //The following code was taken from Lab 14 exercise 4
 app.post("/register_user", function (request, response) {
@@ -153,9 +181,10 @@ app.post("/register_user", function (request, response) {
     }
 
     //email
-    if (request.body.email == '') { //must have an email
+    var emailAddr = request.body.email;
+    if (emailAddr == '') { //must have an email
         errs.email = '<font color="red">Please Enter An Email Address</font>';
-    } else if (ValidateEmail(request.body.email) == false) { //if does not follow proper email format, give error
+    } else if (ValidateEmail(emailAddr) == false) { //if does not follow proper email format, give error
         errs.email = '<font color="red">Please Enter A Valid Email Address</font>';
     } else {
         errs.email = null;
@@ -179,6 +208,7 @@ app.post("/register_user", function (request, response) {
 
     if (errs.username == null && errs.email == null &&
     errs.password == null && errs.repeat_password == null) {
+        addUser(registered_username, emailAddr, pwd, pwdRep);
         response.redirect("./ProductsDisplay1.html"); // Send back to login page with qString    
     } else {
         response.redirect("./registration_display.html"); // Send back to login page with qString    
