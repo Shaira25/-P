@@ -1,5 +1,5 @@
-/* Assignment 2 by Shane Gimenez
-Codes are from Professor Dan's Lab 13 exercises. And with guidance of Kiara Furutani */
+/* Assignment 3 by Shane Gimenez and Marc Masaoy
+Codes are from Professor Dan's Lab 13 exercises. and a guide with Shane's friend Shimizu Kouhei*/
 
 
 var express = require('express');
@@ -19,7 +19,6 @@ app.all('*', function (request, response, next) {
     console.log(request.method + ' to ' + request.path);
     next();
 });
-
 
 
 // Taken from Lab 14
