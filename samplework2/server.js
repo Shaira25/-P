@@ -87,6 +87,110 @@ function acceptLogin(username, request) {
     request.session.loginUser = {username : username, email : userInfo.Email};
 }
 
+// Get total number of items selected.
+function getSumNumOfSelectedProducts(request) {
+    var sumNum = 0;
+    for (var i = 0; i < productNames.length; i++) {
+        var num = getNumOfSelectedProducts(request, productNames[i]);
+        sumNum += num;
+    }
+
+    return sumNum;
+}
+
+// Compute prices of each of purchased items and their sum.
+function computeCartDetail(request) {
+    var subtotal = 0;
+    var taxRate = 0.04712;
+    var cntItems = 0;
+    var cartDetail = {};
+
+    cartDetail.purchasedProducts = [];
+
+    for (var i = 0; i < productNames.length; i++) {
+        // individual amount
+
+        productName = productNames[i];
+
+        var quantity = getNumOfSelectedProducts(request, productName);
+        if (quantity <= 0) {
+            // ignore unpurcahsed items
+            continue;
+        }
+
+        productInfo = products[productName];
+
+        var purchasedProduct = {};
+        purchasedProduct.productName = productName;
+        purchasedProduct.faceMask = productInfo.Facemask;
+        purchasedProduct.quantity = quantity;
+        purchasedProduct.price = productInfo.price;
+
+        var extendedPrice = productInfo.price * quantity;
+        purchasedProduct.extendedPrice = extendedPrice;
+        subtotal = subtotal + extendedPrice;
+
+        cartDetail.purchasedProducts[cntItems] = purchasedProduct;
+        cntItems++;
+    }
+
+    // Compute Shipping
+    // Taken from my WODS: Invoice 2 
+    var shipping = 0;
+
+    if (subtotal <= 50) {
+        shipping = 2;
+    } else if (subtotal <= 100) {
+        shipping = 5;
+    } else {
+        shipping = 0.05 * subtotal
+    }
+
+    var tax = taxRate * subtotal;
+    var total = subtotal + tax + shipping;
+
+    // summarized amount
+    cartDetail.subtotal = subtotal;
+    cartDetail.tax = tax;
+    cartDetail.shipping = shipping;
+    cartDetail.total = total;
+
+    return cartDetail;
+}
+
+function generateMailMessage(cartDetail) {
+
+    var msg = "";
+
+    msg += "Thank you for your order!\n";
+    msg += "\n";
+    msg += "Followings are the items you purchased and the amounts.\n";
+
+    for (var i = 0; i < cartDetail.purchasedProducts.length; i++) {
+        purchasedProduct = cartDetail.purchasedProducts[i];
+
+        var faceMask = purchasedProduct.faceMask;
+        var quantity = purchasedProduct.quantity;
+        var price = purchasedProduct.price;
+        var extendedPrice = purchasedProduct.extendedPrice;
+
+        msg += faceMask + "(" + quantity + ") : \$" + extendedPrice.toFixed(2) + "[\$" + price + "x" + quantity + "]\n";
+    }
+
+    var subtotal = cartDetail.subtotal;
+    var tax = cartDetail.tax;
+    var taxRate = cartDetail.taxRate;
+    var shipping = cartDetail.shipping;
+    var total = cartDetail.total;
+
+    msg += "subtotal: \$" + subtotal.toFixed(2) + "\n";
+    msg += "shipping: \$" + shipping.toFixed(2) + "\n";
+    msg += "tax: \$" + tax.toFixed(2) + "\n";
+    msg += "total: \$" + total.toFixed(2) + "\n";
+
+    return msg;
+}
+
 // Taken from Lab 14
 // Checks if JSON string already exists
 if (fs.existsSync(filename)) {
@@ -246,35 +350,88 @@ app.post("/getLoginStatus", function(request, response) {
         loginStatus.username = '';
         loginStatus.email = '';
     }
+    loginStatus.sumNumPurchase = getSumNumOfSelectedProducts(request);
 
     console.log(loginStatus);
     response.json(loginStatus);
 });
 
+// Get detailed information of all items to purchase.
+app.post("/getCartDetail", function(request, response) {
+    var cartDetail = computeCartDetail(request);
+    console.log(cartDetail);
+    response.json(cartDetail);
+});
+
+// Process the purchase button.
+// If user is not logged in yet, the user is redirected to the login page. 
 app.post("/purchase", function(request, response) {
 
     if (!isLoggedIn(request)) {
         // If user is not logged in, page is redirected to login page.
         response.redirect('./logindisplay.html?redirectTo=cart.html');
     } else {
-        // Send email to the user in prior to displaying the invoice page.
+        // Send email first.
 
-        // Redirect to the invoice page.
-        var resQuery = {};
-        console.log(productNames);
-        for (var i = 0; i < productNames.length; i++) {
-            productName = productNames[i];
-            var num = getNumOfSelectedProducts(request, productName);
+        var cartDetail = computeCartDetail(request);
+        var msg = generateMailMessage(cartDetail);
 
-            if (num <= 0) {
-                continue;
-            }
+        // Could not install nodemailer by npm, so I had to comment out the code below.
+        // var transporter = nodemailer.createTransport({
+        //     host: "mail.hawaii.edu",
+        //     port: 25,
+        //     secure: false, // use TLS
+        //     tls: {
+        //         // do not fail on invalid certs
+        //         rejectUnauthorized: false
+        //     }
+        // });
 
-            resQuery[productName] = num;
+        // Mail SendTo
+        var customerEmail = request.session.loginUser.email;
+
+        // Mail Attributes
+        var mailOptions = {
+            from: 'invoice@shazzey_design.com',
+            to: customerEmail,
+            subject: "Your Invoice - Sha'zey's design!",
+            html: msg
+        };
+        
+        console.log(msg);
+        // console.log(transporter);
+        console.log(mailOptions);
+
+        var errorMsg = "";
+    
+        // Could not install nodemailer by npm, so I had to comment out the code below.
+        // transporter.sendMail(mailOptions, function (error, info) {
+        //     if (error) {
+        //         errorMsg += '<br>There was an error and your invoice could not be emailed :(';
+        //     } else {
+        //         errorMsg += `<br>Your invoice was mailed to ${customerEemail}`;
+        //     }
+        // });
+        
+        if (errorMsg.length > 0) {
+            // If error occurred, the user is redirected back to the cart page.
+            response.redirect('./cart.html?errorMsg=' + errorMsg);
+            return;
+        } else {
+            // If email was sent successfully, the user is redirected to the invoice page.
+            response.redirect('./ProductInvoice.html');
         }
-        resQueryStr = queryString.stringify(resQuery);
-        response.redirect('./ProductInvoice.html?' + resQueryStr);
     }
+});
+
+// Process logout function.
+app.get('/logout', function(request, response) {
+    request.session.destroy(function() {
+        // destroy the session.
+        console.log("User has logged out.");
+    });
+    // redirect the user back to the home page.
+    response.redirect('./index.html');
 });
 
 app.use(express.static('./public')); 
