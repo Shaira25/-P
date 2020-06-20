@@ -37,6 +37,10 @@ var products = {
     },
 };
 
+if (typeof(exports) == 'undefined') {
+    var exports = {};
+}
+
 exports.products = products;
 exports.productNames = productNames;
 

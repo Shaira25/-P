@@ -108,6 +108,8 @@ Assignment 3 by Shane Gimenez and Marc Masaoy */ -->
       color: whitesmoke;
     }
   </style>
+
+
 </head>
 <script src="./product_data.js"></script>
 <script src="./commonFunc.js"></script>
@@ -120,7 +122,7 @@ Assignment 3 by Shane Gimenez and Marc Masaoy */ -->
       faceMaskDesigns: true,
       viewCart : true,
       loginRegister : true,
-      redirectTo : "ProductsDisplay1.html"
+      redirectTo : "ProductsDisplay3.html"
     };
 
     addHeader(headerOption);
@@ -132,20 +134,21 @@ Assignment 3 by Shane Gimenez and Marc Masaoy */ -->
   <h2 style="text-align:center">Facemask Design</h2>
 
   <div class="card">
-    <img src="/images/1.jpeg" alt="Classic" style="width:100%">
-    <h1>Classic</h1>
-    <p>Old school? No worries!</p>
+    <img src="/images/3.jpeg" alt="Shy" style="width:100%">
+    <h1>Shy</h1>
+    <p>Simple but pretty!</p>
     <form name="addToCart" action="/add_to_cart" method="POST">
-      <input type="hidden" name="productName" value="classic_products">
-      <input type="hidden" name="redirectTo" value="ProductsDisplay1.html">
+      <input type="hidden" name="productName" value="shy_products">
+      <input type="hidden" name="redirectTo" value="ProductsDisplay3.html">
       <input id="qty_textbox_message" type="text" placeholder="Enter quantity!" name="quantity"
       onkeyup="checkQuantityTextbox(this);">
       <p><button>Add to Cart</button></p>
     </form>
   </div>
+
 </body>
 <center>
-  <a href="ProductsDisplay2.html">Next </a>
+  <p><a href="ProductsDisplay2.html">Previous </a> </p><p><a href="ProductsDisplay4.html">Next </a></p>
 </center>
 
 </html>

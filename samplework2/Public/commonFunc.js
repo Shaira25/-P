@@ -36,8 +36,17 @@ function addHeader(headerOption) {
         document.write(`<a class="active" href="./index.html">Home</a>`);
     }
 
+    if (headerOption.faceMaskDesigns) {
+        document.write(`<a href="./ProductsDisplay1.html">Facemask Designs</a>`);
+    }
+
     if (headerOption.viewCart) {
-        document.write(`<a href="./cart.html">View Cart</a>`);
+        document.write(`<a href="./cart.html">View Cart`);
+        if (loginStatus.sumNumPurchase > 0) {
+            document.write(`(` + loginStatus.sumNumPurchase + `)</a>`);
+        } else {
+            document.write(`</a>`);
+        }
     }
 
     if (headerOption.loginRegister) {
@@ -47,7 +56,7 @@ function addHeader(headerOption) {
     if (loginStatus.loginFlag == '1') {
         document.write(`
           <a href="#">` + loginStatus.username + `</a>
-          <a href="./"logout.html">Logout</a>
+          <a href="./logout">Logout</a>
         `);
     }
 
