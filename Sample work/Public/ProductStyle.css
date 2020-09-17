@@ -1,0 +1,79 @@
+/* Assignment 3 by Shane Gimenez and Marc Masaoay*/
+/* All codes are from w3schools.com */
+/* and notes fron Assignment 1 examples */
+
+img {
+    border: 2px solid ghostwhite;
+    border-radius: 15px;
+    width: 350px;
+    height: 150px;
+    
+  
+}
+
+Main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    
+
+}
+
+body {
+ background-image: url(./images/waterfallbackdrop.JPG);
+ background-repeat: no-repeat;
+ background-position: fixed;
+ background-size: 100pc;
+}
+a { 
+    color: whitesmoke;
+    text-align: left;
+}
+
+h1 {
+    text-align: center;
+    color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: Bold;
+   
+}
+
+h2 {
+    text-align: center;
+    color: whitesmoke;
+    font-family: 'Courier Ner';
+    font-style: italic;
+    
+
+}
+
+input {
+background-color: palegreen;
+text-align: center;
+
+}
+
+
+ div {
+    text-align: center;
+   
+ }
+
+form {
+
+background-color: lightseagreen;
+border-radius: 20pt;
+}
+
+
+
+
+footer {
+    text-align: center;
+    color: whitesmoke;
+}
+
+p {
+    text-align: right;
+    color: whitesmoke;
+}

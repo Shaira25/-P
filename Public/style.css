@@ -1,0 +1,43 @@
+//Assignment1 by Shane Gimenez//
+//Codes are from w3schools.com//
+
+body {
+    text-align: left;
+    margin: 200px;
+    font-size: xx-large;
+    text-indent: 7pt;
+    color: ghostwhite;
+
+
+    background-image:url('./images/bee.jpg');
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: 85pc;
+    
+  
+}
+
+h6 {
+
+    color: ghostwhite;
+    margin-top: 0pt;
+    font-size: small;
+    
+}
+
+img {
+    image-rendering: 10pt;
+    border: 1px solid #008080;
+    border-radius: 4px; 
+    padding: 5px;
+    width: 300px;
+    height: 200px;
+}
+
+
+img:hover {
+    box-shadow: 0 0 5px 1px ghostwhite;
+  
+}
+
+/* Codes are from w3schools.com */

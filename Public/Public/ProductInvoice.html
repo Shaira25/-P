@@ -1,0 +1,127 @@
+<!-- /* Assignment 1 by Shane Gimenez */
+/* Codes are from invoice2 and with help of Kiara Furutunai with the strings values*/ -->
+
+<script src="./product_data.js" type="text/javascript"></script>
+
+<script>
+  var subtotal = 0;
+
+  // Get the query string values from form submission
+  let params = (new URL(document.location)).searchParams;
+  var quantity = ["", "", "", "", "", ""];
+
+  //Turns the query string values into var values
+  for (var i = 0; i < quantity.length; i++) {
+    quantity[i] = params.get("quantity" + i);
+  }
+</script>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sha'Zey's design</title>
+  <link rel="stylesheet" href="InvoiceStyle.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+</head>
+
+<header>
+  <div>
+    <a class="title" href="ProductsDisplay.html">Back to Design!</a>
+    <br>
+  </div>
+</header>
+
+<body>
+  <div style="width: 600px; margin: auto;">
+    <table id="invoice" border="2" align="center">
+      <tbody>
+        <tr>
+          <th style="text-align: center;" width="43%">Facemask</th>
+          <th style="text-align: center;" width="11%">Quantity</th>
+          <th style="text-align: center;" width="13%">Price</th>
+          <th style="text-align: center;" width="54%">Extended Price</th>
+        </tr>
+        <!-- Prints out the items on the invoice and calculates the totals -->
+        <script>
+          for (var i = 0; i < products.length; i++) {
+            var extended_prices = products[i]["price"] * quantity[i];
+            var subtotal = extended_prices + subtotal;
+            document.write(`
+                <tr>
+                    <td width="43%">${products[i]["Facemask"]}</td>
+                    <td align="center" width="11%">${quantity[i]}</td>
+                    <td align="right" width="13%">\$${products[i]["price"]}</td>
+                    <td align="right" width="54%">\$${extended_prices.toFixed(2)}</td>
+                </tr>
+                
+                `);
+          }
+        </script>
+        <tr>
+          <td colspan="4" width="100%">&nbsp;</td>
+        </tr>
+        <script>
+          //This is from Invoice2 WODs that I made//
+          // Compute tax
+          var tax_rate = 0.04712;
+          var tax = tax_rate * subtotal;
+          
+          //compute shipping
+          var Shipping = 2.50;
+
+          // Compute total
+          var total = tax + subtotal + Shipping;
+        </script>
+        <script>
+          // Subtotal
+          document.write(`
+                <tr>
+                    <td style="text-align: center;" colspan="3" width="67%">Subtotal</td>
+                    <td style="text-align: right;" style="align: right;" width="54%">\$${subtotal.toFixed(2)}</td>
+                </tr>
+                `);
+        </script>
+        <script>
+          // Tax
+          document.write(`
+                <tr>
+                    <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @
+                        4.712%</span></td>
+                    <td style="text-align: right;" width="54%">\$${tax.toFixed(2)}</td>
+                </tr>
+                `);
+        </script>
+<script>
+  // Tax
+  document.write(`
+        <tr>
+            <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Shipping</span></td>
+            <td style="text-align: right;" width="54%">\$${Shipping.toFixed(2)}</td>
+        </tr>
+        `);
+</script>
+
+        <script>
+          // Total
+          document.write(`
+                <tr>
+                    <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+                    <td style="text-align: right;" width="54%"><strong>\$${total.toFixed(2)}</strong></td>
+                </tr>
+                `);
+        </script>
+      </tbody>
+    </table>
+  
+    <p>Thank you for your purchase!</p>
+
+
+  </div>
+
+
+</body>
+
+
+</html>
