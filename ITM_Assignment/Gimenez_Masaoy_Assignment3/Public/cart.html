@@ -1,0 +1,191 @@
+<!-- /* Assignment 3 by Shane Gimenez and Marc Masaoy */
+/* Codes are from invoice2 and w3schools*/ -->
+
+
+
+<script src="./product_data.js"></script>
+
+<script>
+   var subtotal = 0;
+ 
+   // Get the query string values from form submission
+   let params = (new URL(document.location)).searchParams;
+   var quantity = ["", "", "", "", "", ""];
+ 
+   //Turns the query string values into var values
+   for (var i = 0; i < quantity.length; i++) {
+     quantity[i] = params.get("quantity" + i);
+
+if (quantity[i] == null || quantity [i].length == 0 ) {
+    quantity [i] ='0'
+}
+
+   }
+ </script>
+ <html lang="en">
+ 
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Shopping Cart</title>
+   <link rel="stylesheet" href="cart.css">
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet">
+ </head>
+ 
+ <header>
+  <div class="header">
+    <a href="./index.html" class="logo">Sha'zey's design!</a>
+    <div class="header-right">
+      <a class="active" href="./index.html">Home</a>
+      <a href="./logindisplay.html">Login/Register</a>
+    </div>
+ </header>
+ 
+ <body>
+   <!-- Creates table labels -->
+   <div style="width: 600px; margin: auto;">
+     <table id="invoice" border="2">
+       <tbody>
+         <tr>
+           <th style="text-align: center;" width="43%">Facemask</th>
+           <th style="text-align: center;" width="11%">Quantity</th>
+           <th style="text-align: center;" width="13%">Price</th>
+           <th style="text-align: center;" width="54%">Extended Price</th>
+           <th style="text-align: center;" width="43%">modify</th>
+         </tr>
+         <!-- Prints out the items on the invoice and calculates the totals -->
+         <script>
+          var rawCookies = document.cookie;
+          var rawCookieItems = rawCookies.split(";");
+          var cookieData = {};
+
+          for (var i = 0; i < rawCookieItems.length; i++) {
+            var tokens = rawCookieItems[i].split("=");
+            if (tokens == null || tokens.length != 2) {
+              continue;
+            }
+
+            for (var j = 0; j < tokens.length; j++) {
+              tokens[j] = tokens[j].trim();
+            }
+
+            if (tokens[0] == null || tokens[0].length == 0) {
+              continue;
+            }
+
+            cookieData[tokens[0]] = tokens[1];
+          }
+
+          for (var i = 0; i < productNames.length; i++) {
+            var quantity = cookieData["num_" + productNames[i]];
+            if (quantity == null || quantity == "") {
+              quantity = 0;
+            }
+
+            if (quantity == 0) {
+              continue;
+            }
+
+            var productInfo = products[productNames[i]];
+            var extended_prices = productInfo["price"] * quantity;
+            var subtotal = extended_prices + subtotal;
+            // Template taken from Invoice1_1 on Assignment 1 page on class website
+             document.write(`
+                 <tr>
+                  <td width="43%">${productInfo["Facemask"]}</td>
+                     <td align="center" width="11%">${quantity}</td>
+                     <td align="right" width="13%">\$${productInfo["price"]}</td>
+                     <td align="right" width="54%">\$${extended_prices.toFixed(2)}</td>
+                     <td align="right" width="43%"><input type="button" value="Modify Amount" onclick="Modify Item()">
+                       <input type="button" value="Remove" onclick="Remove Item()"></td>
+                 </tr>
+                 `);
+           }
+         </script>
+         <tr>
+           <td colspan="4" width="100%">&nbsp;</td>
+         </tr>
+         <script>
+           // Compute tax
+           
+           var tax = 0.04712;
+ 
+           // Compute Shipping
+           // Taken from my WODS: Invoice 2 
+           if (subtotal <= 50) {
+             shipping = 2;
+           }
+           else if (subtotal <= 100) {
+             shipping = 5;
+           }
+           else {
+             shipping = 0.05 * subtotal
+           }
+ 
+           // Compute total
+           var total = tax + subtotal;
+           
+           // Gives user the option to reset the shopping cart
+           // Code taken from https://www.w3schools.com/jsref/met_form_reset.asp
+           document.write(`
+               <tr>
+            
+            
+            
+            
+                     <td align="center" colspan="3" width="100%"><input type="button" value="Reset" onclick="reset()"></td>
+               </tr>
+               `);
+           // Displays Subtotal
+           document.write(`
+                 <tr>
+                     <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+                     <td style="text-align: right;" style="align: right;" width="54%">\$${subtotal.toFixed(2)}</td>
+                 </tr>
+                 `);
+ 
+           // Displays Tax
+           document.write(`
+                 <tr>
+                     <td style="text-align: center;" colspan="3" width="67%">Tax @
+                         5.75%</span></td>
+                     <td style="text-align: right;" width="54%">\$${tax.toFixed(2)}</td>
+                 </tr>
+                 `);
+ 
+             // Displays Shipping
+             document.write(`
+                   <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+        <td width="54%">\$${shipping.toFixed(2)}</td> 
+      </tr>
+                `);
+ 
+           // Displays Total
+           document.write(`
+                 <tr>
+                     <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+                     <td style="text-align: right;" width="54%"><strong>\$${total.toFixed(2)}</strong></td>
+                 </tr>
+                 `);
+         </script>
+       </tbody>
+     </table>
+   </div>
+ </body>
+ <!-- Purchase button will redirect user to invoice.html page
+ Purchase button was taken from assignment 1/2's products_display.html page
+   -->
+   <ul class="actions" align="center">
+     <li>
+       <div id="buyButton">
+         <br>
+         <input name="purchase_submit_button" type="submit" value="Purchase">
+         </div>
+     </li>
+ </ul>
+ </html>
+
+
+

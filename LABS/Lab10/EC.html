@@ -1,0 +1,36 @@
+<script>
+
+    var ticTac=[];
+    
+    for(x = 0; x < 9; x++){
+        if (Math.random() > 0.5){
+            ticTac[x] = "x";
+        } else {
+            ticTac[x] = "o";
+        }
+    }
+    
+    document.write("<div>");
+    
+    document.write("<table border='2'>");
+    
+    document.write("<tbody>");
+    
+    for (x = 0; x < ticTac.length / 3; x++){
+       col = (x + 1) * 3;
+       startCol = col - 3;
+        document.write(`<tr>`);
+        
+            for (i = startCol; i < col; i++){
+                document.write(`<td width="">${ticTac[i]}</td>`);
+            }
+            document.write(`</tr>`);
+    }
+    
+    document.write("</tbody>");
+    
+    document.write("</table>");
+    
+    document.write("</div>");
+    
+    </script>

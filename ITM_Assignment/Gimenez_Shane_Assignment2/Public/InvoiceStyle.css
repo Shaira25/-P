@@ -1,0 +1,37 @@
+/* Assignment 2 by Shane Gimenez */
+/* All codes are from w3schools.com */
+/* and notes fron Assignment 1 examples */
+
+
+
+body {
+    background-image: url(./images/backdrop3.JPG);
+    background-repeat: no-repeat;
+    background-position: fixed;
+    background-size: cover;
+   }
+
+   a {
+    text-align: center;
+    color: whitesmoke;
+}
+table {
+
+    background-color: blanchedalmond;
+    
+   
+}
+
+footer {
+    text-align: center;
+    color: whitesmoke;
+}
+
+p {
+    text-align: center;
+    color: black;
+    font-size: xx-large;
+    font-family: cursive;
+}
+
+
